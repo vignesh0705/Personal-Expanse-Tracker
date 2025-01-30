@@ -1,23 +1,31 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import axios from 'axios';;
 function Signup({ setIsAuthenticated }) {
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
     confirmPassword: ''
   });
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords don't match!");
       return;
     }
     setIsAuthenticated(true);
-    localStorage.setItem('user', JSON.stringify({ email: formData.email }));
+    let req=await axios.post('http://localhost:8080/signup',formData);
+    if(req.data.message){
+      alert('User created successfully');
+      navigate('/dashboard');
+    }
+    else{
+      alert('User already exists');
+
+    }
     navigate('/dashboard');
   };
 
@@ -34,9 +42,9 @@ function Signup({ setIsAuthenticated }) {
       <form onSubmit={handleSubmit} className="auth-form">
         <input
           type="text"
-          name="name"
+          name="username"
           placeholder="Full Name"
-          value={formData.name}
+          value={formData.username}
           onChange={handleChange}
           required
         />
