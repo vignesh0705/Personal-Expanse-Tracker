@@ -33,8 +33,8 @@ app.post('/signup',async(req,res)=>{
 });
 app.post('/login',async(req,res)=>{
     try{
-        let {email,password}=req.body;
-        let user1=await user.findOne({email:email});
+        var {email,password}=req.body;
+        var user1=await user.findOne({email:email});
         if(user1 && user1.password===password){
             res.status(200).json({message:true});
         }
@@ -49,8 +49,8 @@ app.post('/login',async(req,res)=>{
 });
 app.post('/addexpanse',async(req,res)=>{
     try{
-        let {title,amount,date}=req.body;
-        let newExpanse=new expanse({title,amount,date});
+        var {title,amount,date}=req.body;
+        var newExpanse=new expanse({title,amount,date});
         await newExpanse.save();
         res.status(201).json({message:true});
     }
@@ -61,8 +61,8 @@ app.post('/addexpanse',async(req,res)=>{
 });
 app.post('/addincome',async(req,res)=> {
     try{
-        let{source,amount,date} =req.body;
-        let newIncome= new income({source,amount,date});
+        var{source,amount,date} =req.body;
+        var newIncome= new income({source,amount,date});
         await newIncome.save();
         res.status(201).json({message:true});
     }
