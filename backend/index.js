@@ -19,8 +19,9 @@ app.use(express.json());
 app.use(cors());
 
 app.post('/signup',async(req,res)=>{
-    try{let {username,email,password}=req.body;
-    let newUser=new user({username,email,password});
+    try{
+        var {username,email,password}=req.body;
+    var newUser=new user({username,email,password});
     await newUser.save();
     res.status(201).json({message:true});
     }
