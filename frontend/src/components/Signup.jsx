@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';;
+import axios from 'axios';
 function Signup({ setIsAuthenticated }) {
   const [formData, setFormData] = useState({
     username: '',
@@ -17,7 +17,7 @@ function Signup({ setIsAuthenticated }) {
       return;
     }
     setIsAuthenticated(true);
-    let req=await axios.post('http://localhost:8080/signup',formData);
+    let req=await axios.post('https://personal-expanse-tracker.onrender.com/signup',formData);
     if(req.data.message){
       alert('User created successfully');
       navigate('/dashboard');

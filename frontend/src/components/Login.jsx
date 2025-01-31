@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Login({ setIsAuthenticated }) {
   const [formData, setFormData] = useState({
@@ -8,11 +9,25 @@ function Login({ setIsAuthenticated }) {
   });
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    setIsAuthenticated(true);
-    localStorage.setItem('user', JSON.stringify({ email: formData.email }));
-    navigate('/dashboard');
+    try {
+      const response =await axios.post('https://personal-expanse-tracker.onrender.com/login', formData);
+      console.log(response);
+      if (response.data.message) {
+        alert('Login successful');
+        navigate('/dashboard');
+        setIsAuthenticated(true);
+      } else {
+        alert('Invalid credentials');
+      }
+    }catch(err){
+      console.log(err);
+      alert('Login failed');
+    }
+    // setIsAuthenticated(true);
+    // localStorage.setItem('user', JSON.stringify({ email: formData.email }));
+    
   };
 
   const handleChange = (e) => {
