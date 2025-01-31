@@ -12,7 +12,7 @@ function Income() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response =await axios.post('https://personal-expanse-tracker.onrender.com/income', formData);
+      const response =await axios.post('https://personal-expanse-tracker.onrender.com/addincome', formData);
       if (response.data.message) {
         alert('Income added successfully');
       } else {
