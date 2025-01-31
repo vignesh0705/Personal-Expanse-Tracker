@@ -7,6 +7,7 @@ const cors=require('cors');
 dotenv.config();
 const mongoose=require('mongoose');
 const income = require('./models/income');
+const expanse = require('./models/expanse');
 
 
 mongoose.connect(process.env.MONGO_URL).then(()=>{

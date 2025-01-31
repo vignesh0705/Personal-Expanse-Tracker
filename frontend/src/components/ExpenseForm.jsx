@@ -20,7 +20,7 @@ function ExpenseForm({ onAddExpense }) {
       }
     } catch (err) {
       console.log(err);
-      alert('Failed to add expense');
+      alert('Failed to add  ghjk expense');
     }
     if (!formData.description || !formData.amount) return;
     
