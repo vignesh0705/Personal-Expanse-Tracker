@@ -8,8 +8,19 @@ function ExpenseForm({ onAddExpense }) {
     date: new Date().toISOString().split('T')[0]
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    try {
+      const response =await axios.post('https://personal-expanse-tracker.onrender.com/expense', formData);
+      if (response.data.message) {
+        alert('Expense added successfully');
+      } else {
+        alert('Failed to add expense');
+      }
+    } catch (err) {
+      console.log(err);
+      alert('Failed to add expense');
+    }
     if (!formData.description || !formData.amount) return;
     
     onAddExpense({

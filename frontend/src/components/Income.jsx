@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function Income() {
   const [incomes, setIncomes] = useState([]);
@@ -8,8 +9,20 @@ function Income() {
     date: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response =await axios.post('https://personal-expanse-tracker.onrender.com/income', formData);
+      if (response.data.message) {
+        alert('Income added successfully');
+      } else {
+        alert('Failed to add income');
+      }
+    } catch (err) {
+      console.log(err);
+      alert('Failed to add income');
+    }
+
     setIncomes([...incomes, { ...formData, id: Date.now() }]);
     setFormData({ source: '', amount: '', date: '' });
   };
