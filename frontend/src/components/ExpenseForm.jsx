@@ -11,7 +11,7 @@ function ExpenseForm({ onAddExpense }) {
   const handleSubmit = async(e) => {
     e.preventDefault();
     try {
-      const response =await axios.post('https://personal-expanse-tracker.onrender.com/addexpense', formData);
+      const response =await axios.post('https://personal-expanse-tracker.onrender.com/addexpanse', formData);
       if (response.data.message) {
         alert('Expense added successfully');
       } else {
